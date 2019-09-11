@@ -1,0 +1,89 @@
+Iteration #1
+Total number of hole bits is 496
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_1.sk
+Synthesis succeeded with 2 bits, proceeding to verification.
+Verification failed.
+Use returned counterexamples OrderedDict([('pkt_1', 1001), ('pkt_0', 1), ('pkt_2', 0)]) OrderedDict([('state_group_1_state_0', 0), ('state_group_2_state_0', 0), ('state_group_0_state_0', 0)])
+updated constant array OrderedSet(['0', ' 1', ' 2', ' 3', ' 1000', '1001', '1'])
+Iteration #2
+Total number of hole bits is 496
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_2.sk
+Synthesis succeeded with 2 bits, proceeding to verification.
+Verification failed.
+Use returned counterexamples OrderedDict([('pkt_1', 1001), ('pkt_0', 0), ('pkt_2', 0)]) OrderedDict([('state_group_1_state_0', 0), ('state_group_2_state_0', 0), ('state_group_0_state_0', 1)])
+updated constant array OrderedSet(['0', ' 1', ' 2', ' 3', ' 1000', '1001', '1'])
+Iteration #3
+Total number of hole bits is 496
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_3.sk
+Synthesis succeeded with 2 bits, proceeding to verification.
+Verification failed.
+Use returned counterexamples OrderedDict([('pkt_1', 1001), ('pkt_0', 1), ('pkt_2', 0)]) OrderedDict([('state_group_1_state_0', 0), ('state_group_2_state_0', 1), ('state_group_0_state_0', 0)])
+updated constant array OrderedSet(['0', ' 1', ' 2', ' 3', ' 1000', '1001', '1'])
+Iteration #4
+Total number of hole bits is 496
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_4.sk
+Synthesis succeeded with 2 bits, proceeding to verification.
+Verification failed.
+Use returned counterexamples OrderedDict([('pkt_1', 1002), ('pkt_0', 1), ('pkt_2', 0)]) OrderedDict([('state_group_1_state_0', 0), ('state_group_2_state_0', 1), ('state_group_0_state_0', 0)])
+updated constant array OrderedSet(['0', ' 1', ' 2', ' 3', ' 1000', '1001', '1', '1002'])
+Iteration #5
+Total number of hole bits is 496
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_5.sk
+Synthesis succeeded with 2 bits, proceeding to verification.
+Verification failed.
+Use returned counterexamples OrderedDict([('pkt_1', 1000), ('pkt_2', 0), ('pkt_0', 0)]) OrderedDict([('state_group_1_state_0', 0), ('state_group_2_state_0', 0), ('state_group_0_state_0', 0)])
+updated constant array OrderedSet(['0', ' 1', ' 2', ' 3', ' 1000', '1001', '1', '1002', '1000'])
+Iteration #6
+Total number of hole bits is 536
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_6.sk
+Synthesis succeeded with 2 bits, proceeding to verification.
+Verification failed.
+Use returned counterexamples OrderedDict([('pkt_1', 1001), ('pkt_0', 1), ('pkt_2', 0)]) OrderedDict([('state_group_1_state_0', 0), ('state_group_2_state_0', 2), ('state_group_0_state_0', 0)])
+updated constant array OrderedSet(['0', ' 1', ' 2', ' 3', ' 1000', '1001', '1', '1002', '1000', '2'])
+Iteration #7
+Total number of hole bits is 536
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_7.sk
+Synthesis succeeded with 2 bits, proceeding to verification.
+Verification failed.
+Use returned counterexamples OrderedDict([('pkt_1', 1001), ('pkt_0', 196), ('pkt_2', 0)]) OrderedDict([('state_group_1_state_0', 0), ('state_group_2_state_0', 0), ('state_group_0_state_0', 2)])
+updated constant array OrderedSet(['0', ' 1', ' 2', ' 3', ' 1000', '1001', '1', '1002', '1000', '2', '196'])
+Iteration #8
+Total number of hole bits is 536
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_8.sk
+Synthesis succeeded with 2 bits, proceeding to verification.
+Verification failed.
+Use returned counterexamples OrderedDict([('pkt_1', 1002), ('pkt_0', 1), ('pkt_2', 0)]) OrderedDict([('state_group_1_state_0', 0), ('state_group_2_state_0', 0), ('state_group_0_state_0', 1)])
+updated constant array OrderedSet(['0', ' 1', ' 2', ' 3', ' 1000', '1001', '1', '1002', '1000', '2', '196'])
+Iteration #9
+Total number of hole bits is 536
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_9.sk
+Synthesis succeeded with 2 bits, proceeding to verification.
+Verification failed.
+Use returned counterexamples OrderedDict([('pkt_1', 1001), ('pkt_0', 1), ('pkt_2', 0)]) OrderedDict([('state_group_1_state_0', 0), ('state_group_2_state_0', 1), ('state_group_0_state_0', 2)])
+updated constant array OrderedSet(['0', ' 1', ' 2', ' 3', ' 1000', '1001', '1', '1002', '1000', '2', '196'])
+Iteration #10
+Total number of hole bits is 536
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_10.sk
+Synthesis succeeded with 2 bits, proceeding to verification.
+Verification failed.
+Use returned counterexamples OrderedDict([('pkt_1', 1008), ('pkt_0', 0), ('pkt_2', 0)]) OrderedDict([('state_group_1_state_0', 1), ('state_group_2_state_0', 7), ('state_group_0_state_0', 1)])
+updated constant array OrderedSet(['0', ' 1', ' 2', ' 3', ' 1000', '1001', '1', '1002', '1000', '2', '196', '1008', '7'])
+Iteration #11
+Total number of hole bits is 536
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_11.sk
+Synthesis succeeded with 2 bits, proceeding to verification.
+Verification failed.
+Use returned counterexamples OrderedDict([('pkt_1', 0), ('pkt_0', 1002), ('pkt_2', 0)]) OrderedDict([('state_group_1_state_0', 0), ('state_group_2_state_0', 0), ('state_group_0_state_0', 0)])
+updated constant array OrderedSet(['0', ' 1', ' 2', ' 3', ' 1000', '1001', '1', '1002', '1000', '2', '196', '1008', '7'])
+Iteration #12
+Total number of hole bits is 536
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_12.sk
+Synthesis succeeded with 2 bits, proceeding to verification.
+Verification failed.
+Use returned counterexamples OrderedDict([('pkt_1', 1001), ('pkt_0', 1), ('pkt_2', 0)]) OrderedDict([('state_group_1_state_0', 2), ('state_group_2_state_0', 0), ('state_group_0_state_0', 1)])
+updated constant array OrderedSet(['0', ' 1', ' 2', ' 3', ' 1000', '1001', '1', '1002', '1000', '2', '196', '1008', '7'])
+Iteration #13
+Total number of hole bits is 536
+Sketch file is hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4_codegen_iteration_13.sk
+Compilation failed.
+Output left in hula_forwarding_equivalent_5_canonicalizer_equivalent_0_pred_raw_stateless_alu_4_4.errors

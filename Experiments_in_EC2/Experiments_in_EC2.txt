@@ -13,3 +13,8 @@ flowlets.c          10              pred_raw      stateless_alu          4*(5+1)
 time: real    2544m56.691s)
 6549.68 + 57918.53 + 17084.63 + 4132.01 + 6066.66 + 3768.08 + 8682.51 + 3244.61 + 12397.29 + 32852.47
 
+//TODO: run the 10th mutator of hula_forwarding
+5.HULA_FORWARDING
+hula_forwarding.c   9               pred_raw       stateless_alu         4*(4+2)             44.4%
+time python3 compile_with_chipmunk.py domino_programs/hula_forwarding.c 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 4 4 10 2
+24301.03 + 127196.52(F) + 997.87 + 35377.83 + 142450.67(F) + 77895.63(F) + 123603.80(F) + 1078.87 + 111199.32(F)
