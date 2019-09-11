@@ -4,14 +4,42 @@ Note3: domino grid size XXXXXXXX * XXXXXXXXXX
 Note4: verification bit = 10
 Note5: 3*(4+1) means 3 stages and (4 stateless_alu + 1 stateful_alu) per stage
 Note6: use tofino stateful alu and tofino stateless alu
-Note7: please download taegyunkim's chipmunk repo first
+Note7: please download chipmunk repo (https://github.com/chipmunk-project/chipmunk-tofino) first (here I put in /tmp/chipmunk)
+       with commit number 8adedcdc634926135433ddaf872a7a3b0f941b3f
+Note8: run everything in ~/chipmunk_experiments folder
                        # of mutators     statelfu_alu     stateless_alu                grid_size  success_rate_for_iterative_solver   success_rate_for_domino
 
-1.SNAP_HEAVY_HITTER(ok)
+1.SNAP_HEAVY_HITTER(ok)(run in EC2 VM)
 1.1 (Optimal)
 snap_heavy_hitter.c      10              tofino.alu     stateless_alu_for_tofino        1*(1+1)          100%                         Not run yet
 (cmd line: time python3 run_iterative_solver_automatically.py snap_heavy_hitter 10 2 ~/taegyunkim/chipmunk/example_alus/stateful_alus/tofino.alu ~/taegyunkim/chipmunk/example_alus/stateless_alus/stateless_alu_for_tofino.alu 1 1 10 2
 time: real    7m30s)
 51.14 + 44.99 + 44.93 + 41.10 + 24.79 + 59.95 + 44.96 + 45.46 + 35.44 + 55.44 
 
-2.
+2.CONGA
+2.1 (optimal)
+conga.c             finish 2 out of 10    tofino.alu     stateless_alu_for_tofino        1*(5+1)      All finished ones succeed                         Not run yet
+(cmd line: time python3 run_iterative_solver_automatically.py marple_tcp_nmo 10 2 /tmp/chipmunk/example_alus/stateful_alus/tofino.alu /tmp/chipmunk/example_alus/stateless_alus/stateless_alu_for_tofino.alu 1 5 10 2
+time: real    )
+12.86 + 11.83
+
+3.SAMPLING
+3.1 (optimal)
+sampling.c          finish 1 out of 10    tofino.alu     stateless_alu_for_tofino        2*(1+1)      All finished ones succeed                         Not run yet
+(cmd line: time python3 run_iterative_solver_automatically.py sampling 10 1 /tmp/chipmunk/example_alus/stateful_alus/tofino.alu /tmp/chipmunk/example_alus/stateless_alus/stateless_alu_for_tofino.alu 2 1 10 2
+time: real    )
+24.49
+
+4. MARPLE_TCP_NMO
+4.1 (optimal)
+marple_tcp_nmo.c    finish 6 out of 10    tofino.alu     stateless_alu_for_tofino        3*(2+1)      All finished ones succeed                         Not run yet
+(cmd line: time python3 run_iterative_solver_automatically.py marple_tcp_nmo 10 1 /tmp/chipmunk/example_alus/stateful_alus/tofino.alu /tmp/chipmunk/example_alus/stateless_alus/stateless_alu_for_tofino.alu 3 2 10 2
+time: real    )
+14.09 + 14.02 + 13.31 + 13.17 + 12.86 + 12.52
+
+5. RCP
+5.1 (optimal)       finish 2 out of 10    tofino.alu     stateless_alu_for_tofino        3*(3+1)      All finished ones succeed                         Not run yet
+rcp.c
+(cmd line: time python3 run_iterative_solver_automatically.py rcp 10 1 /tmp/chipmunk/example_alus/stateful_alus/tofino.alu /tmp/chipmunk/example_alus/stateless_alus/stateless_alu_for_tofino.alu 3 3 10 2
+time: real    )
+10489.91 + 31275.27
