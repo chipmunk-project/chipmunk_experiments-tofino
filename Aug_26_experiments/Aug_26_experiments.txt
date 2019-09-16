@@ -88,13 +88,14 @@ time: real    11m20.174s)
 69.19 + 61.66 + 50.32 + 53.37 + 116.48 + 71.43 + 57.80 + 52.53 + 62.82 + 83.74
 
 13.STATEFUL_FW
-stateful_fw.c
+stateful_fw.c      6 out of 10      pred_raw       stateless_alu.alu     4*(5+1)          0% (all timeout)            Not run yet
 (cmd line: time python3 run_iterative_solver_automatically.py stateful_fw 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 4 5 10 2
 time: real    )
+64200 + 72000 + 62400 + 142920 + 136080 + 81480
 
-14.STFQ
-stfq.c                10            nested_if      stateless_alu         4*(8+)          Not run yet                         Not run yet
+14.STFQ(in EC2 VM)
+stfq.c                8 out of 10            nested_if      stateless_alu         4*(8+)          7 success 1 failed (timeout)                         Not run yet
 (cmd line: time python3 run_iterative_solver_automatically.py stfq 10 1 example_alus/stateful_alus/nest example_alus/stateless_alus/stateless_alu.alu 4 8 10 2
 time: real    )
-
+16602.31 + 14263.08 + 1147.68 + 188095.03 + 51023.39 + 19385.52 + 27010.31 + 124533.29(F)
 
