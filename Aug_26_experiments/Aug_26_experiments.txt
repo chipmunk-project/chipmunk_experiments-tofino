@@ -3,6 +3,8 @@ Note2: synthesis time boundary XXXXXXXX minutes
 Note3: domino grid size XXXXXXXX * XXXXXXXXXX
 Note4: verification bit = 10
 Note5: 3*(4+1) means 3 stages and (4 stateless_alu + 1 stateful_alu) per stage
+Note6: please download chipmunk repo https://github.com/chipmunk-project/chipmunk
+       with commit number 2244836794e06c6520701efe5afd94bdfe0c1cf0 
                      # of mutators   statelfu_alu stateless_alu     grid_size  success_rate_for_iterative_solver   success_rate_for_domino
 
 1.BLUE_INCREASE(ok)Y
