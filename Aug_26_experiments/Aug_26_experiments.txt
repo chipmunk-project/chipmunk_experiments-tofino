@@ -67,7 +67,7 @@ time: real    1m29.523s)
 
 7.2 (synthesized allocation for stateless_vars)
 marple_new_flow.c    10              pred_raw     stateless_alu         2*(2+1)         100%                              Not tested yet
-(cmd line: time python3  marple_new_flow 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 2 2 10 2
+(cmd line: time python3 run_iterative_solver_with_synthesized_allocation_automatically.py marple_new_flow 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 2 2 10 2
 time: real    0m56.717s)
 5.36 + 5.64 + 5.67 + 5.71 + 5.52 + 5.65 + 5.70 + 5.47 + 5.54 + 5.62
 
@@ -81,7 +81,7 @@ time: real    2m36.368s)
 
 8.2 (synthesized allocation for stateless_vars)
 marple_tcp_nmo.c     10              pred_raw     stateless_alu         3*(2+1)         100%                        Not tested yet
-(cmd line: time python3  marple_tcp_nmo 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 3 2 10 2
+(cmd line: time python3 run_iterative_solver_with_synthesized_allocation_automatically.py  marple_tcp_nmo 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 3 2 10 2
 time: real    1m32.378s)
 7.79 + 14.59 + 14.40 + 7.79 + 7.81 + 7.75 + 8.08 + 7.69 + 7.66 + 7.99
 
@@ -95,7 +95,7 @@ time: real    11m34.672s)
 
 9.2 (synthesized allocation for stateless_vars)
 rcp.c                10              pred_raw     stateless_alu          3*(3+1)        100%                   Not tested yet
-(cmd line: time python3 run_iterative_solver_automatically.py rcp 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 3 3 10 2
+(cmd line: time python3 run_iterative_solver_with_synthesized_allocation_automatically.py rcp 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 3 3 10 2
 time: real    8m36.251s)
 35.6 + 17.71 + 29.94 + 47.43 + 102.95 + 62.28 + 42.85 + 98.80 + 38.35 + 39.53
 
