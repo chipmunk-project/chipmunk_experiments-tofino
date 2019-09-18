@@ -49,7 +49,7 @@ time: real    2544m56.691s)
 
 5.LEARN_FILTER(ok)Y
 5.1 (optimal)
-learn_filter.c       10              raw          stateless_alu          5*(3+3)         100%                    100% 
+learn_filter.c       10              raw          stateless_alu          5*(3+1)         100%                    100% 
 (cmd line: python3 run_iterative_solver_automatically.py learn_filter 10 1 example_alus/stateful_alus/raw.alu example_alus/stateless_alus/stateless_alu.alu 5 3 10 2
 time: real    32m24s)
 258.40 + 73.84 + 162.39 + 254.41 + 191.34 + 165.21 + 199.10 + 240.73 + 94.77 + 304.39
@@ -110,7 +110,7 @@ time: real    2m58.178s)
 
 10.SNAP_HEAVY_HITTER(ok)Y
 10.1 (optimal)
-snap_heavy_hitter.c   10             pair          stateless_alu         1*(1+)          100%                    100%
+snap_heavy_hitter.c   10             pair          stateless_alu         1*(1+1)          100%                    100%
 (cmd line: time python3 run_iterative_solver_automatically.py snap_heavy_hitter 10 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 1 10 2
 time: real    11m19.105s)
 38.02 + 40.95 + 61.96 + 102.57 + 45.31 + 38.74 + 123.03 + 54.22 + 116.56 + 56.89
