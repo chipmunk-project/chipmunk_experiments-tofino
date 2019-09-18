@@ -9,60 +9,60 @@ Note6: please download chipmunk repo https://github.com/chipmunk-project/chipmun
 
 1.BLUE_INCREASE(ok)Y
 1.1 (Optimal)
-blue_increase.c      10              pred_raw     stateless_alu_arith          4*(2+1)          100%                         10% (No.2)
+blue_increase.c      10              pred_raw     stateless_alu_arith          4*(2+1)          100%                        0%
 (cmd line: time python3 run_iterative_solver_automatically.py blue_increase 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu_arith.alu 4 2 10 2
 time: real    74m15.425s)
 191.12 + 531.61 + 355.93 + 1036.16 + 347.66 + 241.14 + 514.78 + 79.86 + 885.65 + 270.62
 
 1.2 (synthesized allocation for stateless_vars)
-blue_increase.c      10              pred_raw     stateless_alu_arith          4*(2+1)          100%                         10% (No.2)
+blue_increase.c      10              pred_raw     stateless_alu_arith          4*(2+1)          100%                        0%
 (cmd line: time python3 run_iterative_solver_with_synthesized_allocation_automatically.py blue_increase 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu_arith.alu 4 2 10 2
 time: real    94m14.900s)
 57.17 + 222.05 + 357.44 + 367.01 + 444.87 + 176.60 + 360.42 + 322.13 + 453 + 2893.39 
 
-2.BLUE_DECREASE(ok)Y
+2.BLUE_DECREASE(ok)Y                                                                                                  
 2.1 (Optimal)
-blue_decrease.c      10              sub          stateless_alu          4*(2+1)          80%(No.5 and No.10 failed because of timeout)          10% (No.2)
+blue_decrease.c      10              sub          stateless_alu          4*(2+1)          80%(No.5 and No.10 failed because of timeout)          0%
 (cmd line: time python3 run_iterative_solver_automatically.py blue_decrease 10 1 example_alus/stateful_alus/sub.stateful_alu example_alus/stateless_alus/stateless_alu_arith.alu 4 2 10 2
 time: real    4416m6s)
 8139.08 + 2046.75 + 332.81 + 3015.32 + 100563.73(F) + 36132.60 + 40690.60 + 5183.53 + 2473.67 + 66389.01(F)
 
 3.CONGA(ok)Y
 3.1 (optimal)
-conga.c              10              pair          stateless_alu         1*(5+1)          100%                         10% (No.2)
+conga.c              10              pair          stateless_alu         1*(5+1)          100%                         0%
 (cmd line: time python3 run_iterative_solver_automatically.py conga 10 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 5 10 2 
 time: real    4m39.740s)
 21.68 + 42.16 + 23.15 + 23.91 + 33.24 + 22.71 + 22.71 + 24.20 + 23.27 + 41.88
 
 3.2 (synthesized allocation for stateless_vars)
-conga.c              10              pair          stateless_alu         1*(5+1)          100%                         10% (No.2)
+conga.c              10              pair          stateless_alu         1*(5+1)          100%                         0%
 (cmd line: time python3 run_iterative_solver_with_synthesized_allocation_automatically.py conga 10 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 5 10 2
 time: real    2m27.836s)
 14.36 + 13.77 + 14.18 + 13.49 + 14.68 + 13.37 + 14.11 + 21.74 + 13.54 + 13.79
 
 4.FLOWLETS(ok in EC2 VM)
 4.1 (optimal)
-flowlets.c          10              pred_raw      stateless_alu          4*(5+1)              100%                       100%
+flowlets.c          10              pred_raw      stateless_alu          4*(5+1)              100%                   100%    
 (cmd line: time python3 run_iterative_solver_automatically.py flowlets 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 4 5 10 2 
 time: real    2544m56.691s)
 6549.68 + 57918.53 + 17084.63 + 4132.01 + 6066.66 + 3768.08 + 8682.51 + 3244.61 + 12397.29 + 32852.47
 
 5.LEARN_FILTER(ok)Y
 5.1 (optimal)
-learn_filter.c       10              raw          stateless_alu          5*(3+3)         100%                   100%
+learn_filter.c       10              raw          stateless_alu          5*(3+3)         100%                    100% 
 (cmd line: python3 run_iterative_solver_automatically.py learn_filter 10 1 example_alus/stateful_alus/raw.alu example_alus/stateless_alus/stateless_alu.alu 5 3 10 2
 time: real    32m24s)
 258.40 + 73.84 + 162.39 + 254.41 + 191.34 + 165.21 + 199.10 + 240.73 + 94.77 + 304.39
 
 6.MARPLE_NEW_FLOW(ok)Y
 6.1(Optimal)
-marple_new_flow.c    10              pred_raw     stateless_alu         2*(2+1)         100%                    10% (No.2)
+marple_new_flow.c    10              pred_raw     stateless_alu         2*(2+1)         100%                       0%
 (cmd line: time python3 run_iterative_solver_automatically.py marple_new_flow 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 2 2 10 2
 time: real    1m29.523s)
 9.39 + 8.90 + 8.55 + 8.07 + 9.00 + 9.14 + 9.11 + 8.87 + 8.66 + 8.99 
 
 6.2 (synthesized allocation for stateless_vars)
-marple_new_flow.c    10              pred_raw     stateless_alu         2*(2+1)         100%                        10% (No.2)
+marple_new_flow.c    10              pred_raw     stateless_alu         2*(2+1)         100%                        0%
 (cmd line: time python3 run_iterative_solver_with_synthesized_allocation_automatically.py marple_new_flow 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 2 2 10 2
 time: real    0m56.717s)
 5.36 + 5.64 + 5.67 + 5.71 + 5.52 + 5.65 + 5.70 + 5.47 + 5.54 + 5.62
@@ -70,13 +70,13 @@ time: real    0m56.717s)
 
 7.MARPLE_TCP_NMO(ok)Y
 7.1 (Optimal)
-marple_tcp_nmo.c     10              pred_raw     stateless_alu         3*(2+1)         100%                        10% (No.2)
+marple_tcp_nmo.c     10              pred_raw     stateless_alu         3*(2+1)         100%                        0%
 (cmd line: time python3 run_iterative_solver_automatically.py marple_tcp_nmo 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 3 2 10 2
 time: real    2m36.368s)
 15.69 + 15.69 + 15.46 + 15.35 + 15.61 + 15.35 + 15.73 + 16.03 + 15.28 + 15.33
 
 7.2 (synthesized allocation for stateless_vars)
-marple_tcp_nmo.c     10              pred_raw     stateless_alu         3*(2+1)         100%                        10% (No.2)
+marple_tcp_nmo.c     10              pred_raw     stateless_alu         3*(2+1)         100%                        0%
 (cmd line: time python3 run_iterative_solver_with_synthesized_allocation_automatically.py  marple_tcp_nmo 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 3 2 10 2
 time: real    1m32.378s)
 7.79 + 14.59 + 14.40 + 7.79 + 7.81 + 7.75 + 8.08 + 7.69 + 7.66 + 7.99
@@ -97,13 +97,13 @@ time: real    8m36.251s)
 
 9.SAMPLING(ok)Y
 9.1 (optimal)
-sampling.c           10            if_else_raw    stateless_alu          2*(1+1)         100%                   10% (No.2)
+sampling.c           10            if_else_raw    stateless_alu          2*(1+1)         100%                   0%
 (cmd line: time python3 run_iterative_solver_automatically.py sampling 10 1 example_alus/stateful_alus/if_else_raw.alu example_alus/stateless_alus/stateless_alu.alu 2 1 10 2
 time: real    4m51.919s)
 28.34 + 31.10 + 29.26 + 13.98 + 31.96 + 30.71 + 22.25 + 36.33 + 30.41 + 36.74
 
 9.2 (synthesized allocation for stateless_vars)
-sampling.c           10            if_else_raw    stateless_alu          2*(1+1)         100%                   10% (No.2)
+sampling.c           10            if_else_raw    stateless_alu          2*(1+1)         100%                   0%
 (cmd line: time python3 run_iterative_solver_with_synthesized_allocation_automatically.py sampling 10 1 example_alus/stateful_alus/if_else_raw.alu example_alus/stateless_alus/stateless_alu.alu 2 1 10 2
 time: real    2m58.178s)
 18.57 + 18.32 + 18.74 + 27.59 + 18.56 + 18.82 + 18.65 + 9.76 + 14.26 + 14.11
@@ -116,7 +116,7 @@ time: real    11m19.105s)
 38.02 + 40.95 + 61.96 + 102.57 + 45.31 + 38.74 + 123.03 + 54.22 + 116.56 + 56.89
 
 10.2 (synthesized allocation for stateless_vars)
-snap_heavy_hitter.c   10             pair          stateless_alu         1*(1+)          100%                     100%
+snap_heavy_hitter.c   10             pair          stateless_alu         1*(1+1)          100%                     100%
 (cmd line: time python3 run_iterative_solver_with_synthesized_allocation_automatically.py snap_heavy_hitter 10 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 1 10 2
 time: real    5m49.741s)
 52.75 + 36.58 + 36.8 + 41.27 + 36.41 + 58.06 + 20.66 + 25.88 + 19.99 + 20.53 
@@ -124,31 +124,31 @@ time: real    5m49.741s)
 
 11.SPAM_DETECTION(ok)Y
 11.1 (optimal)
-spam_detection.c      10             pair          stateless_alu         1*(1+)          100%                        80% (No.1 2 3 4 7 8 9 10)
+spam_detection.c      10             pair          stateless_alu         1*(1+1)          100%                     80%(No.1 2 4 5 6 7 8 10)
 (cmd line: time python3 run_iterative_solver_automatically.py spam_detection 10 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 1 10 2
 time: real    11m20.174s)
 69.19 + 61.66 + 50.32 + 53.37 + 116.48 + 71.43 + 57.80 + 52.53 + 62.82 + 83.74
 
 11.2 (synthesized allocation for stateless_vars)
-spam_detection.c      10             pair          stateless_alu         1*(1+)          100%                         80% (No.1 2 3 4 7 8 9 10)
+spam_detection.c      10             pair          stateless_alu         1*(1+1)          100%                       80%(No.1 2 4 5 6 7 8 10)
 (cmd line: time python3 run_iterative_solver_with_synthesized_allocation_automatically.py spam_detection 10 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 1 10 2
 time: real    5m7.038s)
 20.32 + 25.91 + 36.92 + 36.59 + 37.51 + 25.63 + 36.12 + 30.96 + 30.28 + 25.98
 
 12.STATEFUL_FW(in EC2 VM)
-stateful_fw.c      6 out of 10      pred_raw       stateless_alu.alu     4*(5+1)          0% (all timeout)            100%
+stateful_fw.c      6 out of 10      pred_raw       stateless_alu.alu     4*(5+1)          0% (all timeout)           90%(Mo.1 2 3 4 5 7 8 9 10) 
 (cmd line: time python3 run_iterative_solver_automatically.py stateful_fw 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 4 5 10 2
 time: real    9318m)
 64200 + 72000 + 62400 + 142920 + 136080 + 81480
 
 13.STFQ(in EC2 VM)
-stfq.c                10            nested_if      stateless_alu         4*(8+)         70% (3 timeout)       0%
+stfq.c                10            nested_if      stateless_alu         4*(8+1)         70% (3 timeout)              0% 
 (cmd line: time python3 run_iterative_solver_automatically.py stfq 10 1 example_alus/stateful_alus/nested_ifs.alu example_alus/stateless_alus/stateless_alu.alu 4 8 10 2
 time: real    9185m40.62s)
 16602.31 + 14263.08 + 1147.68 + 188095.03(F) + 51023.39 + 19385.52 + 27010.31 + 124533.29(F) + 12060 + 97020(F)
 
 14.DNS_TTL_CHANGE (in EC2 VM)
-dns_ttl_change.c      10            nested_if      stateless_alu         4*(4+1)         20%(1 out of 5)
+dns_ttl_change.c      10            nested_if      stateless_alu         4*(4+1)         20%(1 out of 5)              0%
 (cmd line: time python3 run_iterative_solver_automatically.py dns_ttl_change 10 1 example_alus/stateful_alus/nested_ifs.alu example_alus/stateless_alus/stateless_alu.alu 4 8 10 2
 time: real    7014m)
 86400 (F) + 86400 (F)+ 75240 + 86400 (F) + 86400 (F) 

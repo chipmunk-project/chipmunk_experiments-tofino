@@ -4,6 +4,7 @@ Note4: verification bit = 10
 Note5: 3*(4+1) means 3 stages and (4 stateless_alu + 1 stateful_alu) per stage
 Note6: please download chipmunk repo https://github.com/chipmunk-project/chipmunk-tofino
        with commit number d2ea172110c1e7fb800f02d87535865a0dbbb7dd
+Note7: set the time limit for hole-elimination as 10 * (the time spent for cex mode)
                      # of mutators   statelfu_alu stateless_alu     grid_size  success_rate_for_iterative_solver   success_rate_for_domino
 1.MARPLE_NEW_FLOW
 1.1(Optimal)
@@ -24,6 +25,12 @@ marple_new_flow.c    10              pred_raw     stateless_alu_arith         2*
 time: real    0m32.381s)ok
 3.27 + 3.05 + 3.27 + 3.10 + 3.23 + 3.09 + 3.25 + 3.09 + 3.12 + 3.10
 
+1.4 (hole-elimination mode)
+marple_new_flow.c    10              pred_raw     stateless_alu         2*(2+1)         100%                              Not tested yet
+(cmd line: 
+time: real    0m56.583s)ok
+5.55 + 5.51 + 5.43 + 5.88 + 5.61 + 5.62 + 5.62 + 5.38 + 5.62 + 5.54
+
 2.MARPLE_TCP_NMO
 2.1 (Optimal)
 marple_tcp_nmo.c     10              pred_raw     stateless_alu         3*(2+1)         100%                        Not tested yet
@@ -37,11 +44,17 @@ marple_tcp_nmo.c     10              pred_raw     stateless_alu         3*(2+1) 
 time: real    1m19.302s)ok
 7.92 + 8.21 + 7.85 + 7.89 + 8.00 + 6.96 + 7.59 + 7.93 + 7.80 + 8.32
 
-2.3 (stateless_alu_arith)
+2.3 (stateless_alu_arith)ok
 marple_tcp_nmo.c     10              pred_raw     stateless_alu_arith         3*(2+1)         100%                        Not tested yet
 (cmd line: time python3 run_iterative_solver_automatically.py marple_tcp_nmo 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu_arith.alu 3 2 10 2
 time: real    1m7.934s)ok
 6.77 + 6.73 + 6.78 + 6.91 + 6.91 + 6.89 + 6.76 + 7.00 + 5.57 + 6.82
+
+2.4 (hole-elimination mode)ok
+marple_tcp_nmo.c     10              pred_raw     stateless_alu         3*(2+1)         100%                        Not tested yet
+(cmd line: 
+time: real    1m13.250s)
+7.18 + 7.09 + 7.28 + 7.50 + 7.02 + 7.64 + 7.06 + 7.04 + 7.34 + 7.34
 
 3.SAMPLING
 3.1 (optimal)
@@ -56,11 +69,17 @@ sampling.c           10            if_else_raw    stateless_alu          2*(1+1)
 time: real    2m56.460s)ok
 16.69 + 17.32 + 13.07 + 16.70 + 13.30 + 17.21 + 17.40 + 21.19 + 25.31 + 17.44
 
-3.3 (stateless_alu_arith)
+3.3 (stateless_alu_arith)ok
 sampling.c           10            if_else_raw    stateless_alu_arith          2*(1+1)         100%                  Not tested yet
 (cmd line: time python3 run_iterative_solver_automatically.py sampling 10 1 example_alus/stateful_alus/if_else_raw.alu example_alus/stateless_alus/stateless_alu_arith.alu 2 1 10 2
 time: real    2m38.904s)ok
 12.95 + 17.56 + 17.63 + 9.08 + 17.50 + 13.32 + 17.61 + 17.41 + 18.00 + 17.01
+
+3.4 (hole-elimination mode)ok Seting the timeout to be 150
+sampling.c           10            if_else_raw    stateless_alu          2*(1+1)         0%                    Not tested yet
+(cmd line: time python3 run_iterative_solver_automatically.py sampling 10 1 example_alus/stateful_alus/if_else_raw.alu example_alus/stateless_alus/stateless_alu.alu 2 1 10 2
+time: real    )
+150.01 + 150.01 + 150.01 + 150.01 + 150.01 + 150.01 + 150.01 + 150.01 + 150.01 + 150.01
 
 4.SNAP_HEAVY_HITTER
 4.1 (optimal)
@@ -81,6 +100,12 @@ snap_heavy_hitter.c   10             pair          stateless_alu_arith         1
 time: real    5m0.669s)ok
 35.57 + 29.69 + 24.89 + 35.53 + 14.58 + 24.83 + 30.29 + 45.24 + 29.78 + 29.44
 
+4.4 (hole-elimination mode)ok Seting the timeout to be 350
+snap_heavy_hitter.c   10             pair          stateless_alu         1*(1+)          0%                         Not run yet
+(cmd line: 
+time: real    58m20.806s)ok
+350.01 + 350.01 + 350.01 + 350.01 + 350.01 + 350.01 + 350.01 + 350.01 + 350.01 + 350.01
+
 5.SPAM_DETECTION
 5.1 (optimal)ok
 spam_detection.c      10             pair          stateless_alu         1*(1+)          100%                         Not run yet
@@ -99,6 +124,11 @@ spam_detection.c      10             pair          stateless_alu_arith         1
 (cmd line: time python3 run_iterative_solver_with_synthesized_allocation_automatically.py spam_detection 10 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu_arith.alu 1 1 10 2
 time: real    5m23.911s)ok
 41.07 + 34.91 + 41.31 + 36.10 + 29.70 + 36.16 + 19.34 + 34.56 + 24.54 + 25.4
+
+5.1 (hole-elimination mode)ok Seting the timeout to be 310)
+spam_detection.c      10             pair          stateless_alu         1*(1+)          100%                         Not run yet
+(cmd line: time python3 run_iterative_solver_automatically.py spam_detection 10 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 1 10 2
+time: real    )
 
 6.LEARN_FILTER
 6.1 (optimal)ok
