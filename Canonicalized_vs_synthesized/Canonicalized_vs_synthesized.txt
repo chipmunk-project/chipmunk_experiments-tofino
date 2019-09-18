@@ -77,7 +77,7 @@ time: real    2m38.904s)ok
 
 3.4 (hole-elimination mode)ok Seting the timeout to be 150
 sampling.c           10            if_else_raw    stateless_alu          2*(1+1)         0%                    Not tested yet
-(cmd line: time python3 run_iterative_solver_automatically.py sampling 10 1 example_alus/stateful_alus/if_else_raw.alu example_alus/stateless_alus/stateless_alu.alu 2 1 10 2
+(cmd line: 
 time: real    )
 150.01 + 150.01 + 150.01 + 150.01 + 150.01 + 150.01 + 150.01 + 150.01 + 150.01 + 150.01
 
@@ -125,10 +125,11 @@ spam_detection.c      10             pair          stateless_alu_arith         1
 time: real    5m23.911s)ok
 41.07 + 34.91 + 41.31 + 36.10 + 29.70 + 36.16 + 19.34 + 34.56 + 24.54 + 25.4
 
-5.1 (hole-elimination mode)ok Seting the timeout to be 310)
-spam_detection.c      10             pair          stateless_alu         1*(1+)          100%                         Not run yet
+5.4 (hole-elimination mode)ok Seting the timeout to be 310)
+spam_detection.c      10             pair          stateless_alu         1*(1+)          0%                         Not run yet
 (cmd line: time python3 run_iterative_solver_automatically.py spam_detection 10 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 1 10 2
-time: real    )
+time: real    51m40.805s)
+310.01 + 310.01 + 310.01 + 310.01 + 310.01 + 310.01 + 310.01 + 310.01 + 310.01 + 310.01
 
 6.LEARN_FILTER
 6.1 (optimal)ok
@@ -146,9 +147,16 @@ time: real    139m45.254s)ok
 6.3 (stateless_alu_arith)
 learn_filter.c       10              raw          stateless_alu_arith          5*(3+3)    0%                   Not tested yet
 (cmd line: python3 run_iterative_solver_automatically.py learn_filter 10 1 example_alus/stateful_alus/raw.alu example_alus/stateless_alus/stateless_alu_arith.alu 5 3 10 2
-time: real    )
+time: real    250m)
 Set timeout to be 1500 seconds
 1500.03 + 1500.00 + 1500.00 + 1500.00 + 1500.00 + 1500.00 + 1500.00 + 1500.00 + 1500.00 + 1500.00
+
+6.4 (hole-elimination mode)ok Seting the timeout to be 1200
+learn_filter.c       10              raw          stateless_alu          5*(3+3)         running                   Not tested yet
+(cmd line: python3 run_iterative_solver_automatically.py learn_filter 10 1 example_alus/stateful_alus/raw.alu example_alus/stateless_alus/stateless_alu.alu 5 3 10 2
+time: real    20m12s)
+103.0 + 114.03 + 126.29 + 135.81 + 148.18 + 95.76 + 110.54 + 95.57 + 143.49 + 140.25 
+
 
 7.BLUE_INCREASE
 7.1 (optimal)
@@ -168,3 +176,10 @@ blue_increase.c      10              pred_raw     stateless_alu_arith          4
 (cmd line: time python3 run_iterative_solver_automatically.py blue_increase 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu_arith.alu 4 2 10 2
 time: real    31m53.996s)ok
 206.28 + 84.51 + 113.07 + 55.73 + 136.78 + 546.98 + 124.59 + 124.65 + 225.34 + 295.24
+
+7.4 (hole-elimination mode)ok Seting the timeout to be 3600
+blue_increase.c      10              pred_raw     stateless_alu          4*(2+1)          0%                         Not run yet
+(cmd line: 
+time: real    600m1.571s)
+3600.06 + 3600.08 + 3600.08 + 3600.08 + 3600.09 + 3600.07 + 3600.08 + 3600.08 + 3600.08 + 3600.07
+
