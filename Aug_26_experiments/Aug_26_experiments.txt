@@ -47,7 +47,7 @@ flowlets.c          10              pred_raw      stateless_alu          4*(5+1)
 time: real    2544m56.691s)
 6549.68 + 57918.53 + 17084.63 + 4132.01 + 6066.66 + 3768.08 + 8682.51 + 3244.61 + 12397.29 + 32852.47
 
-5.HULA_FORWARDING
+5.HULA_FORWARDING ((in EC2 VM))
 hula_forwarding.c                                                                                              100% 
 time python3 compile_with_chipmunk.py domino_programs/hula_forwarding.c 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 4 4 10 2
 
@@ -139,7 +139,7 @@ spam_detection.c      10             pair          stateless_alu         1*(1+) 
 time: real    5m7.038s)
 20.32 + 25.91 + 36.92 + 36.59 + 37.51 + 25.63 + 36.12 + 30.96 + 30.28 + 25.98
 
-13.STATEFUL_FW
+13.STATEFUL_FW(in EC2 VM)
 stateful_fw.c      6 out of 10      pred_raw       stateless_alu.alu     4*(5+1)          0% (all timeout)            100%
 (cmd line: time python3 run_iterative_solver_automatically.py stateful_fw 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 4 5 10 2
 time: real    9318m)
@@ -147,7 +147,12 @@ time: real    9318m)
 
 14.STFQ(in EC2 VM)
 stfq.c                10            nested_if      stateless_alu         4*(8+)         70% (3 timeout)       0%
-(cmd line: time python3 run_iterative_solver_automatically.py stfq 10 1 example_alus/stateful_alus/nest example_alus/stateless_alus/stateless_alu.alu 4 8 10 2
+(cmd line: time python3 run_iterative_solver_automatically.py stfq 10 1 example_alus/stateful_alus/nested_ifs.alu example_alus/stateless_alus/stateless_alu.alu 4 8 10 2
 time: real    9185m40.62s)
 16602.31 + 14263.08 + 1147.68 + 188095.03(F) + 51023.39 + 19385.52 + 27010.31 + 124533.29(F) + 12060 + 97020(F)
 
+15.DNS_TTL_CHANGE (in EC2 VM)
+dns_ttl_change.c      10            nested_if      stateless_alu         4*(4+1)         20%(1 out of 5)
+(cmd line: time python3 run_iterative_solver_automatically.py dns_ttl_change 10 1 example_alus/stateful_alus/nested_ifs.alu example_alus/stateless_alus/stateless_alu.alu 4 8 10 2
+time: real    7014m)
+86400 (F) + 86400 (F)+ 75240 + 86400 (F) + 86400 (F) 
