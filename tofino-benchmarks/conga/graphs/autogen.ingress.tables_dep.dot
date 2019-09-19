@@ -1,0 +1,10 @@
+digraph ingress {
+conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_1_table -> conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_2_table [style=dotted ];
+conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_0_table -> conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_1_table [color=blue label="ipv4.pkt_0" decorate=true];
+conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_0_table -> conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_2_table [color=blue label="ipv4.pkt_0" decorate=true];
+conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_2_table -> conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_3_table [style=dotted ];
+conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_3_table -> conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_4_table [style=dotted ];
+conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_3_table -> conga_tofino_stateless_alu_for_tofino_1_5_stateful_alu_0_0_table [color=blue label="ipv4.pkt_3" decorate=true];
+conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_4_table -> conga_tofino_stateless_alu_for_tofino_1_5_stateful_alu_0_0_table [color=blue label="ipv4.pkt_4" decorate=true];
+conga_tofino_stateless_alu_for_tofino_1_5_stateful_alu_0_0_table -> mac_forward [style=dotted ];
+}

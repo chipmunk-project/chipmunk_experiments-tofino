@@ -1,0 +1,8 @@
+digraph ingress {
+rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_2_table -> mac_forward [style=dotted ];
+rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_2_table -> rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_1_table [color=blue label="ipv4.pkt_2" decorate=true];
+rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_2_table -> rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_0_table [color=blue label="ipv4.pkt_2" decorate=true];
+rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_1_table -> rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_2_table [color=yellow label="ipv4.pkt_1" decorate=true];
+rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_0_table -> rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_1_table [style=dotted ];
+rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_0_table -> rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_2_table [color=blue label="ipv4.pkt_0" decorate=true];
+}

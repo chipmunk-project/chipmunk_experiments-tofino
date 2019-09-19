@@ -1,0 +1,17 @@
+digraph g {
+   buffer [shape=doublecircle];
+   egress [shape=doublecircle];
+   rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_0_table [shape=ellipse];
+   rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_0_table -> rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_2_table [arrowhead=normal label="ALL"];
+   rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_2_table [shape=ellipse];
+   rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_2_table -> rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_0_table [arrowhead=normal label="ALL"];
+   rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_0_table [shape=ellipse];
+   rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_0_table -> rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_1_table [arrowhead=normal label="ALL"];
+   rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_1_table [shape=ellipse];
+   rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_1_table -> rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_2_table [arrowhead=normal label="ALL"];
+   rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_2_table [shape=ellipse];
+   rcp_tofino_stateless_alu_for_tofino_1_3_stateful_alu_0_2_table -> mac_forward [arrowhead=normal label="ALL"];
+   mac_forward [shape=ellipse];
+   mac_forward -> buffer [arrowhead=normal label="ALL"];
+   buffer -> egress [arrowhead=normal]
+}

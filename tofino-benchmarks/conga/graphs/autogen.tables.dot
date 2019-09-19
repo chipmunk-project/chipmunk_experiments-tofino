@@ -1,0 +1,19 @@
+digraph g {
+   buffer [shape=doublecircle];
+   egress [shape=doublecircle];
+   conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_0_table [shape=ellipse];
+   conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_0_table -> conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_1_table [arrowhead=normal label="ALL"];
+   conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_1_table [shape=ellipse];
+   conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_1_table -> conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_2_table [arrowhead=normal label="ALL"];
+   conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_2_table [shape=ellipse];
+   conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_2_table -> conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_3_table [arrowhead=normal label="ALL"];
+   conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_3_table [shape=ellipse];
+   conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_3_table -> conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_4_table [arrowhead=normal label="ALL"];
+   conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_4_table [shape=ellipse];
+   conga_tofino_stateless_alu_for_tofino_1_5_stateless_alu_0_4_table -> conga_tofino_stateless_alu_for_tofino_1_5_stateful_alu_0_0_table [arrowhead=normal label="ALL"];
+   conga_tofino_stateless_alu_for_tofino_1_5_stateful_alu_0_0_table [shape=ellipse];
+   conga_tofino_stateless_alu_for_tofino_1_5_stateful_alu_0_0_table -> mac_forward [arrowhead=normal label="ALL"];
+   mac_forward [shape=ellipse];
+   mac_forward -> buffer [arrowhead=normal label="ALL"];
+   buffer -> egress [arrowhead=normal]
+}

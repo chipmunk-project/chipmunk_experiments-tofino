@@ -1,0 +1,12 @@
+digraph g {
+   wire [shape=doublecircle];
+   __table_rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_0_table [label=rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_0_table shape=doublecircle];
+   wire -> start
+   start [shape=record label="{start | {current(96, 16)}}"];
+   start -> parse_ethernet [label="0x800"];
+   parse_ethernet [shape=record label="{parse_ethernet(14) | {ethernet.etherType}}"];
+   parse_ethernet -> parse_ipv4 [label="0x800"];
+   parse_ipv4 [shape=record label="{parse_ipv4(12)}"];
+   parse_ipv4 -> __table_rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_0_table [label="default"];
+   parse_ethernet -> __table_rcp_tofino_stateless_alu_for_tofino_1_3_stateless_alu_0_0_table [label="default"];
+}

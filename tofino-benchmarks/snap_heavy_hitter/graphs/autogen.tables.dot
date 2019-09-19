@@ -1,0 +1,11 @@
+digraph g {
+   buffer [shape=doublecircle];
+   egress [shape=doublecircle];
+   snap_heavy_hitter_tofino_stateless_alu_for_tofino_1_1_stateless_alu_0_0_table [shape=ellipse];
+   snap_heavy_hitter_tofino_stateless_alu_for_tofino_1_1_stateless_alu_0_0_table -> snap_heavy_hitter_tofino_stateless_alu_for_tofino_1_1_stateful_alu_0_0_table [arrowhead=normal label="ALL"];
+   snap_heavy_hitter_tofino_stateless_alu_for_tofino_1_1_stateful_alu_0_0_table [shape=ellipse];
+   snap_heavy_hitter_tofino_stateless_alu_for_tofino_1_1_stateful_alu_0_0_table -> mac_forward [arrowhead=normal label="ALL"];
+   mac_forward [shape=ellipse];
+   mac_forward -> buffer [arrowhead=normal label="ALL"];
+   buffer -> egress [arrowhead=normal]
+}
