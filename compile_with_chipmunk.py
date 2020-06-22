@@ -28,8 +28,6 @@ def main(argv):
     bit_size_for_constant_set = str(argv[8])
 
     cmd_line_list, constant_set, total_num_of_grouped_files = generate_cmd_line(program_file, group_size, bit_size_for_constant_set)
-    print(cmd_line_list)
-    print(constant_set)
 
     # Output canonicalizer file to /tmp/file_name_canonicalizer.c
     canonicalizer_file ="/tmp/" + program_file[program_file.rfind('/') + 1 : program_file.rfind('.')] + "_canonicalizer.c"
@@ -42,18 +40,19 @@ def main(argv):
     # Run iterative solver for grouped files
     sketch_file_name = "/tmp/" + canonicalizer_file[canonicalizer_file.rfind('/') + 1:canonicalizer_file.rfind('.')] + "_equivalent_" + str(int(total_num_of_grouped_files) - 1) +".sk"
     constant_set = "'" + constant_set + "'"
+    time_used_for_all_slice = []
+    depth_list = []
+    width_list = []
     for i in range(len(cmd_line_list)):
         flag = 0
         for depth in range(1, num_pipeline_stages + 1):
             if flag == 1:
                 break
             for width in range(1, num_alus_per_stage + 1):
-                print("depth = ", depth, " width = ", width, " flag = ", flag)
                 str_to_run_in_terminal = "iterative_solver " + sketch_file_name + " " + stateful_alu_file + " " + stateless_alu_file + " " + \
                                  str(depth) + " " + str(width) + " " + \
                                  constant_set + " " + input_bits + " --parallel-sketch " + cmd_line_list[i]
                 time_start=time.time()
-                print(str_to_run_in_terminal)
                 (ret_code, output) = subprocess.getstatusoutput(str_to_run_in_terminal)
                 iterative_solver_output_file_name = '/tmp/' + \
                                             sketch_file_name[sketch_file_name.rfind('/') + 1:sketch_file_name.rfind('.')] + '_' + \
@@ -66,14 +65,20 @@ def main(argv):
                     file.write(output)
                 # It will return 0 if one of the grouped files get successful compilation
                 if (ret_code == 0):
+                    dep_wid_info = re.findall("Synthesis succeeded with (\d+) stages and (\d+) ALUs per stage", output)
+                    depth_list.append(dep_wid_info[0])
+                    width_list.append(dep_wid_info[1])
+                    print(str_to_run_in_terminal)
                     time_end=time.time()
-                    print("Compilation succeeds for Program: " + program_file[program_file.rfind('/') + 1:] + ", with stateful alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + ", with grid size: " + str(depth) + " * " + str(width) + " in slice " + str(i + 1))
+                    print("Compilation succeeds for Program: " + program_file[program_file.rfind('/') + 1:] + ", with stateful alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + ", with grid size: " + str(dep_wid_info[0]) + " * " + str(dep_wid_info[1]) + " in slice " + str(i + 1))
                     print('time cost', round(time_end-time_start, 2),'s')
+                    time_used_for_all_slice.append(time_end-time_start)
                     flag = 1
                     break
         if flag == 0:
             print("Compilation fails for Program: " + program_file[program_file.rfind('/') + 1:] + ", with alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + ", with grid size: " + str(num_pipeline_stages) + " * " + str(num_alus_per_stage) + " in slice No." + str(i + 1))
             sys.exit(1)
-
+    print("The total time used if we use parallel computing resources is:", min(time_used_for_all_slice))
+    print("The resource usage is ", max(depth_list), " Stages with ", sum(width_list), " ALUs per stage")
 if __name__ == "__main__":
     main(sys.argv)
