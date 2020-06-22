@@ -66,11 +66,11 @@ def main(argv):
                 # It will return 0 if one of the grouped files get successful compilation
                 if (ret_code == 0):
                     dep_wid_info = re.findall("Synthesis succeeded with (\d+) stages and (\d+) ALUs per stage", output)
-                    depth_list.append(dep_wid_info[0])
-                    width_list.append(dep_wid_info[1])
+                    depth_list.append(dep_wid_info[0][0])
+                    width_list.append(dep_wid_info[0][1])
                     print(str_to_run_in_terminal)
                     time_end=time.time()
-                    print("Compilation succeeds for Program: " + program_file[program_file.rfind('/') + 1:] + ", with stateful alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + ", with grid size: " + str(dep_wid_info[0]) + " * " + str(dep_wid_info[1]) + " in slice " + str(i + 1))
+                    print("Compilation succeeds for Program: " + program_file[program_file.rfind('/') + 1:] + ", with stateful alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + ", with grid size: " + str(dep_wid_info[0][0]) + " * " + str(dep_wid_info[0][1]) + " in slice " + str(i + 1))
                     print('time cost', round(time_end-time_start, 2),'s')
                     time_used_for_all_slice.append(time_end-time_start)
                     flag = 1
