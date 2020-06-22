@@ -19,7 +19,6 @@ def main(argv):
         exit(1)
     # program_file means the original domino program
     program_file = str(argv[1])
-    print("------------------------", program_file)
     group_size = str(argv[2])
     stateful_alu_file = str(argv[3])
     stateless_alu_file = str(argv[4])
@@ -68,8 +67,8 @@ def main(argv):
                 # It will return 0 if one of the grouped files get successful compilation
                 if (ret_code == 0):
                     dep_wid_info = re.findall("Synthesis succeeded with (\d+) stages and (\d+) ALUs per stage", output)
-                    depth_list.append(dep_wid_info[0][0])
-                    width_list.append(dep_wid_info[0][1])
+                    depth_list.append(int(dep_wid_info[0][0]))
+                    width_list.append(int(dep_wid_info[0][1]))
                     print(str_to_run_in_terminal)
                     time_end=time.time()
                     print("Compilation succeeds for Program: " + program_file[program_file.rfind('/') + 1:] + ", with stateful alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + ", with grid size: " + str(dep_wid_info[0][0]) + " * " + str(dep_wid_info[0][1]) + " in slice " + str(i + 1))
@@ -80,7 +79,7 @@ def main(argv):
         if flag == 0:
             print("Compilation fails for Program: " + program_file[program_file.rfind('/') + 1:] + ", with alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + ", with grid size: " + str(num_pipeline_stages) + " * " + str(num_alus_per_stage) + " in slice No." + str(i + 1))
             sys.exit(1)
-    print("The total time used if we use parallel computing resources is:", min(time_used_for_all_slice))
-    print("The resource usage is ", max(depth_list), " Stages with ", sum(width_list), " ALUs per stage")
+    print("The total time used if we use parallel computing resources is:", round(max(time_used_for_all_slice),2), 's')
+    print("The resource usage is ", max(depth_list), " Stages with " , sum(width_list), " ALUs per stage")
 if __name__ == "__main__":
     main(sys.argv)

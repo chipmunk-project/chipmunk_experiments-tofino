@@ -19,7 +19,6 @@ def generate_cmd_line(program_file, group_size, bit_size_for_constant_set):
     (ret_code, output) = subprocess.getstatusoutput("domino " + program_file + " hh.sk 10 10")
     
     # Run canonicalizer
-    print("canonicalizer " + program_file)
     (ret_code, output) = subprocess.getstatusoutput("canonicalizer " + program_file)
     assert ret_code == 0, "canonicalizer failed"
     
@@ -104,6 +103,11 @@ def generate_cmd_line(program_file, group_size, bit_size_for_constant_set):
                 if group_num not in state_groups:
                     state_groups.append(group_num)
                 if group_num in total_state_groups:
+                    # TODO: add all state variables which influence the state_var
+                    key_val = "state_and_packet.state_group_" + str(group_num) + "_state_0"
+                    for x in influ_dic[key_val]:
+                        if x.find("pkt_") != -1 and re.findall("state_and_packet.pkt_(\d+)", x)[0] not in input_packet:
+                            input_packet.append(re.findall("state_and_packet.pkt_(\d+)", x)[0])
                     total_state_groups.remove(group_num)
             else:
                 assert x.find("pkt_") != -1
