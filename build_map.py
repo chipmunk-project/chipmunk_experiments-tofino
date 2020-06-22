@@ -19,6 +19,7 @@ def generate_cmd_line(program_file, group_size, bit_size_for_constant_set):
     (ret_code, output) = subprocess.getstatusoutput("domino " + program_file + " hh.sk 10 10")
     
     # Run canonicalizer
+    print("canonicalizer " + program_file)
     (ret_code, output) = subprocess.getstatusoutput("canonicalizer " + program_file)
     assert ret_code == 0, "canonicalizer failed"
     
@@ -181,11 +182,12 @@ def generate_cmd_line(program_file, group_size, bit_size_for_constant_set):
         cmd_line_list.append(cmd_str)
     return cmd_line_list, constant_set, total_num_of_grouped_files
 
-program_file_list = ['learn_filter.c', 'blue_increase.c', 'blue_decrease.c', 'stateful_fw.c', 'dns_ttl_change.c', 'flowlets.c', 'rcp.c',
-                     'marple_new_flow.c', 'marple_tcp_nmo.c', 'sampling.c', 'stfq.c', 'conga.c', 'snap_heavy_hitter.c', 'spam_detection.c']
-group_size_list = ['1','1','1','1','1','1','1','1','1','1','1','2','2','2']
+def run_all_experiments():
+    program_file_list = ['learn_filter.c', 'blue_increase.c', 'blue_decrease.c', 'stateful_fw.c', 'dns_ttl_change.c', 'flowlets.c', 'rcp.c',
+                         'marple_new_flow.c', 'marple_tcp_nmo.c', 'sampling.c', 'stfq.c', 'conga.c', 'snap_heavy_hitter.c', 'spam_detection.c']
+    group_size_list = ['1','1','1','1','1','1','1','1','1','1','1','2','2','2']
 
-for i in range(len(program_file_list)):
-    program_file = "/Users/Xiangyu/domino_example_test/domino-examples/domino_programs/" + program_file_list[i]
-    group_size = group_size_list[i] 
-    generate_cmd_line(program_file, group_size, "2")
+    for i in range(len(program_file_list)):
+        program_file = "/Users/Xiangyu/domino_example_test/domino-examples/domino_programs/" + program_file_list[i]
+        group_size = group_size_list[i] 
+        generate_cmd_line(program_file, group_size, "2")
