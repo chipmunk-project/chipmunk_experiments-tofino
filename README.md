@@ -17,6 +17,12 @@ test domino program with chipmunk
 
 6. If you want to run Chipmunk on one particular Domino program with slicing
 ```
+   python3 compile_with_chipmunk.py ~/domino-examples/domino_programs/marple_tcp_nmo.c 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 3 2 10 2
+   python3 compile_with_chipmunk.py ~/domino-examples/domino_programs/marple_new_flow.c 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 2 2 10 2
+   python3 compile_with_chipmunk.py ~/domino-examples/domino_programs/sampling.c 1 example_alus/stateful_alus/if_else_raw.alu example_alus/stateless_alus/stateless_alu.alu 2 1 10 2
+   python3 compile_with_chipmunk.py ~/domino-examples/domino_programs/rcp.c 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 2 2 10 2
+   python3 compile_with_chipmunk.py ~/domino-examples/domino_programs/spam_detection.c 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 1 10 2
+   python3 compile_with_chipmunk.py ~/domino-examples/domino_programs/snap_heavy_hitter.c 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 1 10 2
+   python3 compile_with_chipmunk.py ~/domino-examples/domino_programs/conga.c 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 2 10 2
    python3 compile_with_chipmunk.py ~/domino_example_test/domino-examples/domino_programs/stfq.c 1 example_alus/stateful_alus/nested_ifs.alu example_alus/stateless_alus/stateless_alu.alu 3 3 10 2
 ```
-Note: August 15, 2019: The python script has been changed. So the above command lines need to be updated accordingly.
