@@ -66,7 +66,7 @@ def main(argv):
 
     print("The successful compilation rate for " + domino_file_name +
       " mutators by iterative_solver is " + str(Sum/total_num_of_files*100) + "%")
-    print("The avg compilation time is ", round(sum(time_group)/len(time_group), 2))
+    print("The avg compilation time is ", round(sum(time_group)/len(time_group), 2), "s")
     print("The avg resource usage is ", round(sum(depth_list)/len(depth_list), 2), 
           " Stages with ", round(sum(width_list)/len(width_list), 2), " ALUs per stage")
 
