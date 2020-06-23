@@ -32,7 +32,7 @@ def main(argv):
     input_bits = str(argv[7])
     bit_size_for_constant_set = str(argv[8])
 
-    total_num_of_files = 1
+    total_num_of_files = 10
     Sum = 0
     # Run total_num_of_files mutators of domino_file_name
     for i in range(total_num_of_files):
@@ -46,7 +46,6 @@ def main(argv):
                               num_alus_per_stage + " " + \
                               input_bits + " " + \
                               bit_size_for_constant_set
-
         print(content_in_cmd_line)
         (ret_code, output) = subprocess.getstatusoutput(content_in_cmd_line)
         print(output)
