@@ -10,22 +10,19 @@ import time
 
 def main(argv):
     """Main program."""
-    if len(argv) != 9 :
-        print("Usage: python3 " + argv[0] + " <domino program file> <group size> <stateful alu file> <stateless alu file> " +
-              "<number of pipeline stages> " +
-              "<number of stateless/stateful ALUs per stage> " +
-              "<input bits> " +
-               "bit_size_for_constant_set")
+    if len(argv) != 7 :
+        print("Usage: python3 " + argv[0] + " <domino program file> <group size> " + "<number of pipeline stages> " +
+              "<number of stateless/stateful ALUs per stage> " + "<input bits> " + "bit_size_for_constant_set")
         exit(1)
     # program_file means the original domino program
     program_file = str(argv[1])
     group_size = str(argv[2])
-    stateful_alu_file = str(argv[3])
-    stateless_alu_file = str(argv[4])
-    num_pipeline_stages = int(argv[5])
-    num_alus_per_stage = int(argv[6])
-    input_bits = str(argv[7])
-    bit_size_for_constant_set = str(argv[8])
+    stateful_alu_file = "example_alus/stateful_alus/tofino.alu"
+    stateless_alu_file = "example_alus/stateless_alus/stateless_alu_for_tofino.alu"
+    num_pipeline_stages = int(argv[3])
+    num_alus_per_stage = int(argv[4])
+    input_bits = str(argv[5])
+    bit_size_for_constant_set = str(argv[6])
 
     cmd_line_list, constant_set, total_num_of_grouped_files = generate_cmd_line(program_file, group_size, bit_size_for_constant_set)
 
