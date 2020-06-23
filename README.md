@@ -8,7 +8,7 @@ test domino program with chipmunk
 4. Then run Chipmunk on all generated mutators
    (e.g. 
    ```
-   time python3 run_iterative_solver_automatically.py rcp 10 1 example_alus/stateful_alus/pred_raw.alu example_alus/stateless_alus/stateless_alu.alu 4 4 10 2
+   python3 run_iterative_solver_automatically.py ../domino-examples/domino_programs/learn_filter.c 1 example_alus/stateful_alus/raw.alu example_alus/stateless_alus/stateless_alu.alu 5 3 10 2
    ```)
 
 #TODO: add run_domino_automatically.py to domino-examples repo
@@ -25,4 +25,5 @@ test domino program with chipmunk
    python3 compile_with_chipmunk.py ~/domino-examples/domino_programs/snap_heavy_hitter.c 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 1 10 2
    python3 compile_with_chipmunk.py ~/domino-examples/domino_programs/conga.c 2 example_alus/stateful_alus/pair.alu example_alus/stateless_alus/stateless_alu.alu 1 2 10 2
    python3 compile_with_chipmunk.py ~/domino_example_test/domino-examples/domino_programs/stfq.c 1 example_alus/stateful_alus/nested_ifs.alu example_alus/stateless_alus/stateless_alu.alu 3 3 10 2
+   python3 compile_with_chipmunk.py ../domino-examples/domino_programs/learn_filter.c 1 example_alus/stateful_alus/raw.alu example_alus/stateless_alus/stateless_alu.alu 5 3 10 2
 ```
