@@ -5,7 +5,7 @@
 
 import subprocess
 import sys
-import time
+import re
 
 def main(argv):
     """Main program."""
@@ -34,6 +34,9 @@ def main(argv):
 
     total_num_of_files = 10
     Sum = 0
+    time_group = []
+    depth_list = []
+    width_list = []
     # Run total_num_of_files mutators of domino_file_name
     for i in range(total_num_of_files):
         domino_file = "/tmp/" + filename + "_equivalent_" + str(i+1) + ".c"
@@ -48,7 +51,11 @@ def main(argv):
                               bit_size_for_constant_set
         print(content_in_cmd_line)
         (ret_code, output) = subprocess.getstatusoutput(content_in_cmd_line)
-        print(output)
+        time_spent = re.findall("The total time used if we use parallel computing resources is: (\d+\.\d+)", output)[0]
+        time_group.append(float(time_spent))
+        resource_usg = re.findall("The resource usage is  (\d+)  Stages with  (\d+)  ALUs per stage", output)[0]
+        depth_list.append(int(resource_usg[0]))
+        width_list.append(int(resource_usg[1]))
         if (ret_code == 0):
             print("Success")
             Sum += 1
@@ -59,6 +66,9 @@ def main(argv):
 
     print("The successful compilation rate for " + domino_file_name +
       " mutators by iterative_solver is " + str(Sum/total_num_of_files*100) + "%")
+    print("The avg compilation time is ", round(sum(time_group)/len(time_group), 2))
+    print("The avg resource usage is ", round(sum(depth_list)/len(depth_list), 2), 
+          " Stages with ", round(sum(width_list)/len(width_list), 2), " ALUs per stage")
 
 if __name__ == "__main__":
     main(sys.argv)
