@@ -8,6 +8,10 @@ import re
 import subprocess
 import time
 
+def print_dic(given_dic):
+    for x, y in given_dic.items():
+        print(x, "<-----------", y)
+
 def main(argv):
     """Main program."""
     if len(argv) != 7 :
@@ -24,7 +28,7 @@ def main(argv):
     input_bits = str(argv[5])
     bit_size_for_constant_set = str(argv[6])
 
-    cmd_line_list, constant_set, total_num_of_grouped_files = generate_cmd_line(program_file, group_size, bit_size_for_constant_set)
+    cmd_line_list, constant_set, total_num_of_grouped_files, given_dic = generate_cmd_line(program_file, group_size, bit_size_for_constant_set)
 
     # Output canonicalizer file to /tmp/file_name_canonicalizer.c
     canonicalizer_file ="/tmp/" + program_file[program_file.rfind('/') + 1 : program_file.rfind('.')] + "_canonicalizer.c"
@@ -48,7 +52,8 @@ def main(argv):
             for width in range(1, num_alus_per_stage + 1):
                 str_to_run_in_terminal = "iterative_solver " + sketch_file_name + " " + stateful_alu_file + " " + stateless_alu_file + " " + \
                                  str(depth) + " " + str(width) + " " + \
-                                 constant_set + " " + input_bits + " --parallel-sketch " + cmd_line_list[i]
+                                 constant_set + " " + input_bits + " --parallel-sketch " + cmd_line_list[i] + " --target-tofino"
+                print(str_to_run_in_terminal)
                 time_start=time.time()
                 (ret_code, output) = subprocess.getstatusoutput(str_to_run_in_terminal)
                 iterative_solver_output_file_name = '/tmp/' + \
@@ -62,10 +67,25 @@ def main(argv):
                     file.write(output)
                 # It will return 0 if one of the grouped files get successful compilation
                 if (ret_code == 0):
+                    print_dic(given_dic)
+                    print("Start tofino verification by doing the following steps:")
+                    tofino_file_name = sketch_file_name[sketch_file_name.rfind('/') + 1:sketch_file_name.rfind('.')] + \
+                                        '_tofino_stateless_alu_for_tofino_' + str(depth) + "_" + str(width) + ".p4"
+                    print("Step1: scp " + tofino_file_name + " root@tofino1.cs.nyu.edu:/tmp/autogen.p4")
+                    print("Step2: ssh root@tofino1.cs.nyu.edu")
+                    print("Step3: cd ~/bf-sde-8.2.0")
+                    print("Step4: ./p4_build.sh /tmp/autogen.p4" + " may need some manual semantically equivalent fix to change 0- to -")
+                    print("Step5: cd ~/tofino-boilerplate/CP")
+                    print("Step6: ./run.sh + feeding the initial value")
+                    res_str = input("If pass tofino verification, enter yes, otherwise no: ")
+                    if res_str == 'yes':
+                        print("verification passed for slice No." + str(i + 1))
+                    else:
+                        print("verification failed")
+                        sys.exit(1)
                     dep_wid_info = re.findall("Synthesis succeeded with (\d+) stages and (\d+) ALUs per stage", output)
                     depth_list.append(int(dep_wid_info[0][0]))
                     width_list.append(int(dep_wid_info[0][1]))
-                    print(str_to_run_in_terminal)
                     time_end=time.time()
                     print("Compilation succeeds for Program: " + program_file[program_file.rfind('/') + 1:] + ", with stateful alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + ", with grid size: " + str(dep_wid_info[0][0]) + " * " + str(dep_wid_info[0][1]) + " in slice " + str(i + 1))
                     print('time cost', round(time_end-time_start, 2),'s')

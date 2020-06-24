@@ -184,7 +184,7 @@ def generate_cmd_line(program_file, group_size, bit_size_for_constant_set):
             for index in input_packet:
                 cmd_str += str(index) + " "
         cmd_line_list.append(cmd_str)
-    return cmd_line_list, constant_set, total_num_of_grouped_files
+    return cmd_line_list, constant_set, total_num_of_grouped_files, dic_list[0]
 
 def run_all_experiments():
     program_file_list = ['learn_filter.c', 'blue_increase.c', 'blue_decrease.c', 'stateful_fw.c', 'dns_ttl_change.c', 'flowlets.c', 'rcp.c',
