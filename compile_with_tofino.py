@@ -12,6 +12,60 @@ def print_dic(given_dic):
     for x, y in given_dic.items():
         print(x, "<-----------", y)
 
+# output the input matching
+# which pkt fields is feeded into which phv container
+def input_order(var_dic, given_list):
+    print("For input matching:")
+    for i in range(len(given_list)):
+        item = given_list[i]
+        val = "state_and_packet.pkt_" + item
+        for x, y in var_dic.items():
+            if y == val:
+                print(x, "<----------- state_and_packet.pkt_" + str(i))
+
+# output which value we should focus on
+def output_order(var_dic, given_list_of_list):
+    print("The following stateful and stateless variables we should focus on:")
+    assert(len(given_list_of_list) == 2)
+    for i in range(2):
+        if i == 1:
+            for x in given_list_of_list[i]:
+                key_word = "state_and_packet.state_group_" + x
+                for k, v in var_dic.items():
+                    if v.find(key_word) != -1:
+                        if v[-1] == '0':
+                            # remove the array index part
+                            if k.find('[') != -1:
+                                k = k[:k.find('[')]
+                            print(k, "<----------- reg_" + x + " register_value_f0")
+                        else:
+                            assert v[-1] == '1'
+                            # remove the array index part
+                            if k.find('[') != -1:
+                                k = k[:k.find('[')]
+                            print(k, "<----------- reg_" + x + " register_value_f1")
+        if i == 0:
+            for j in range(len(given_list_of_list[i])):
+                val = "state_and_packet.pkt_" + given_list_of_list[i][j]
+                for k, v in var_dic.items():
+                    if v == val:
+                        print(k, "<----------- state_and_packet.pkt_"+ str(j))
+
+def parse_cmd_line(cmd_str):
+    cmd_arr = cmd_str.split(' ')
+    # return list include pkt_fields, state_groups, input_pkt
+    ret_list = [[], [], []]
+    for x in cmd_arr:
+        if x == '--pkt-fields':
+            i = 0
+        elif x == '--state-groups':
+            i = 1
+        elif x == '--input-packet':
+            i = 2
+        elif x.isdigit():
+            ret_list[i].append(str(x))
+    return ret_list
+
 def main(argv):
     """Main program."""
     if len(argv) != 7 :
@@ -67,14 +121,17 @@ def main(argv):
                     file.write(output)
                 # It will return 0 if one of the grouped files get successful compilation
                 if (ret_code == 0):
-                    print_dic(given_dic)
+                    # TODO:get info from cmd_line_list[i]
+                    cmd_info = parse_cmd_line(cmd_line_list[i]) 
+                    input_order(given_dic, cmd_info[2])
+                    output_order(given_dic, cmd_info[:2])
                     print("Start tofino verification by doing the following steps:")
                     tofino_file_name = sketch_file_name[sketch_file_name.rfind('/') + 1:sketch_file_name.rfind('.')] + \
                                         '_tofino_stateless_alu_for_tofino_' + str(depth) + "_" + str(width) + ".p4"
                     print("Step1: scp " + tofino_file_name + " root@tofino1.cs.nyu.edu:/tmp/autogen.p4")
                     print("Step2: ssh root@tofino1.cs.nyu.edu")
                     print("Step3: cd ~/bf-sde-8.2.0")
-                    print("Step4: ./p4_build.sh /tmp/autogen.p4" + " may need some manual semantically equivalent fix to change 0- to -")
+                    print("Step4: ./p4_build.sh /tmp/autogen.p4" + "    NOTE:may need some manual semantically equivalent fix to change 0- to -")
                     print("Step5: cd ~/tofino-boilerplate/CP")
                     print("Step6: ./run.sh + feeding the initial value")
                     res_str = input("If pass tofino verification, enter yes, otherwise no: ")
