@@ -1,0 +1,41 @@
+Install necessary repos 
+NOTE1: Please put them into one folder
+NOTE2: When installing SKETCH, please put add it into the PATH
+1. install chipmunk_experiments-tofino and follow the README file inside
+   git clone https://github.com/chipmunk-project/chipmunk_experiments-tofino
+2. install domino-compiler and follow the README file inside
+   git clone https://github.com/chipmunk-project/domino-compiler
+3. install domino-examples and follow the README file inside
+   git clone https://github.com/chipmunk-project/domino-examples
+4. install chipmunk-tofino and follow the README file inside
+   git clone https://github.com/chipmunk-project/chipmunk-tofino
+
+# In powerful machine with ~64 cores
+program_file_list = ['learn_filter.c', 'blue_increase.c', 'blue_decrease.c', 'stateful_fw.c', 'dns_ttl_change.c', 'flowlets.c', 'rcp.c',
+                         'marple_new_flow.c', 'marple_tcp_nmo.c', 'sampling.c', 'stfq.c', 'conga.c', 'snap_heavy_hitter.c', 'spam_detection.c']
+
+tofino_program_list = ['blue_increase.c', 'blue_decrease.c', 'dns_ttl_change.c', 'flowlets.c', 'rcp.c',
+                         'marple_new_flow.c', 'marple_tcp_nmo.c', 'sampling.c', 'conga.c', 'snap_heavy_hitter.c', 'spam_detection.c']
+
+# In normal machine with ~8 cores
+program_file_list = ['rcp.c', 'marple_new_flow.c', 'marple_tcp_nmo.c', 'sampling.c', 'stfq.c', 'conga.c', 'snap_heavy_hitter.c', 'spam_detection.c']
+
+tofino_program_list = ['marple_new_flow.c', 'marple_tcp_nmo.c', 'sampling.c', 'conga.c', 'snap_heavy_hitter.c', 'spam_detection.c']
+
+Script to run the test
+# Run domino
+
+# Run Chipmunk with Banzai's ALU
+1. go to chipmunk_experiments-tofino folder
+```
+cd ~/chipmunk_experiments-tofino
+python3 run_expr_simple.py
+```
+
+# Run Chipmunk with Tofino's ALU
+Because the user need to run one benchmark and verify one benchmark
+1. go to chipmunk_experiments-tofino folder (Take conga.c as an example)
+```
+cd ~/chipmunk_experiments-tofino
+python3 compile_with_tofino.py ../domino-examples/domino_programs/sampling.c 1 3 3 10 2
+```
