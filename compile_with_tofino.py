@@ -133,7 +133,7 @@ def main(argv):
                     print("Step1: scp " + tofino_file_name + " root@tofino1.cs.nyu.edu:/tmp/autogen.p4")
                     print("Step2: ssh root@tofino1.cs.nyu.edu")
                     print("Step3: cd ~/bf-sde-8.2.0")
-                    print("Step4: ./p4_build.sh /tmp/autogen.p4" + "    NOTE:may need some manual semantically equivalent fix to change 0- to -")
+                    print("Step4: ./p4_build.sh /tmp/autogen.p4" + "    NOTE:may need some manual semantically equivalent fix to change (((0))) - to -")
                     print("Step5: cd ~/tofino-boilerplate/CP")
                     print("Step6: ./run.sh + feeding the initial value")
                     res_str = input("If pass tofino verification, enter yes, otherwise no: ")
