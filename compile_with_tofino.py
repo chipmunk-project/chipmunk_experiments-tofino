@@ -15,17 +15,18 @@ def print_dic(given_dic):
 # output the input matching
 # which pkt fields is feeded into which phv container
 def input_order(var_dic, given_list):
+    print()
     print("For input matching:")
     for i in range(len(given_list)):
         item = given_list[i]
         val = "state_and_packet.pkt_" + item
         for x, y in var_dic.items():
             if y == val:
-                print(x, "<----------- state_and_packet.pkt_" + str(i))
+                print(x, "is mapped to field" + str(i))
 
 # output which value we should focus on
 def output_order(var_dic, given_list_of_list):
-    print("The following stateful and stateless variables we should focus on:")
+    print("For this particular slice, we should look at the output of following stateful and stateless variables:")
     assert(len(given_list_of_list) == 2)
     for i in range(2):
         if i == 1:
@@ -37,19 +38,20 @@ def output_order(var_dic, given_list_of_list):
                             # remove the array index part
                             if k.find('[') != -1:
                                 k = k[:k.find('[')]
-                            print(k, "<----------- reg_" + x + " register_value_f0")
+                            print(k, "is mapped to reg_" + x + " register_value_f1")
                         else:
                             assert v[-1] == '1'
                             # remove the array index part
                             if k.find('[') != -1:
                                 k = k[:k.find('[')]
-                            print(k, "<----------- reg_" + x + " register_value_f1")
+                            print(k, "is mapped to reg_" + x + " register_value_f0")
         if i == 0:
             for j in range(len(given_list_of_list[i])):
                 val = "state_and_packet.pkt_" + given_list_of_list[i][j]
                 for k, v in var_dic.items():
                     if v == val:
-                        print(k, "<----------- state_and_packet.pkt_"+ str(j))
+                        print(k, "is mapped to field"+ str(j))
+    print()
 
 def parse_cmd_line(cmd_str):
     cmd_arr = cmd_str.split(' ')

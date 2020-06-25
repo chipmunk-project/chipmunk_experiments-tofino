@@ -32,3 +32,10 @@ python3 compile_with_chipmunk.py ../domino-examples/domino_programs/learn_filter
 ```
 python3 compile_with_tofino.py ~/domino_example_test/domino-examples/domino_programs/conga.c 2 1 3 10 2
 ```
+The following steps are used to run p4 in tofino
+Step1: scp <generated p4 program> root@tofino1.cs.nyu.edu:/tmp/autogen.p4
+Step2: ssh root@tofino1.cs.nyu.edu
+Step3: cd ~/bf-sde-8.2.0
+Step4: ./p4_build.sh /tmp/autogen.p4    NOTE:may need some manual semantically equivalent fix to change 0- to -
+Step5: cd ~/tofino-boilerplate/CP
+Step6: ./run.sh + feeding the initial value
