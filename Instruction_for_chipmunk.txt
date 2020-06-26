@@ -28,7 +28,6 @@ Script to run the test
 # Run Chipmunk with Banzai's ALU
 1. go to chipmunk_experiments-tofino folder
 ```
-cd ~/chipmunk_experiments-tofino
 python3 run_expr_simple.py
 ```
 
@@ -36,6 +35,14 @@ python3 run_expr_simple.py
 Because the user need to run one benchmark and verify one benchmark
 1. go to chipmunk_experiments-tofino folder (Take conga.c as an example)
 ```
-cd ~/chipmunk_experiments-tofino
 python3 compile_with_tofino.py ../domino-examples/domino_programs/sampling.c 1 3 3 10 2
+python3 compile_with_tofino.py ../domino-examples/domino_programs/rcp.c 1 1 6 10 2
+python3 compile_with_tofino.py ../domino-examples/domino_programs/marple_new_flow.c 1 2 3 10 2
+python3 compile_with_tofino.py ../domino-examples/domino_programs/marple_tcp_nmo.c 1 3 2 10 2
+python3 compile_with_tofino.py ../domino-examples/domino_programs/conga.c 2 1 3 10 2
+python3 compile_with_tofino.py ../domino-examples/domino_programs/snap_heavy_hitter.c 2 1 2 10 2
+python3 compile_with_tofino.py ../domino-examples/domino_programs/blue_increase.c 1 4 2 10 2
+python3 compile_with_tofino.py ../domino-examples/domino_programs/blue_decrease.c 1 4 2 10 2
+python3 compile_with_tofino.py ../domino-examples/domino_programs/dns_ttl_change.c 1 3 6 10 2
+python3 compile_with_tofino.py ../domino-examples/domino_programs/flowlets.c 1 3 5 10 2
 ```
