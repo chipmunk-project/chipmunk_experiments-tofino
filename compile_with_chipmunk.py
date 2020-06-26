@@ -27,7 +27,7 @@ def main(argv):
     input_bits = str(argv[7])
     bit_size_for_constant_set = str(argv[8])
 
-    cmd_line_list, constant_set, total_num_of_grouped_files = generate_cmd_line(program_file, group_size, bit_size_for_constant_set)
+    cmd_line_list, constant_set, total_num_of_grouped_files, _ = generate_cmd_line(program_file, group_size, bit_size_for_constant_set)
 
     # Output canonicalizer file to /tmp/file_name_canonicalizer.c
     canonicalizer_file ="/tmp/" + program_file[program_file.rfind('/') + 1 : program_file.rfind('.')] + "_canonicalizer.c"
