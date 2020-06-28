@@ -2,6 +2,7 @@ import subprocess
 import sys
 from build_map import generate_cmd_line
 import time
+import re
 
 def run_simple(program_list, grid_size_list, group_size_list, alu_list, stateless_alu):
     for i in range(len(program_list) -1, -1, -1):
@@ -55,7 +56,10 @@ def run_complex(program_dict):
                 width_list = []
                 input_bits = '10'
                 for i in range(len(cmd_line_list)):
+                    flag = 0
                     for g in y[0]:
+                        depth = g.split(' ')[1]
+                        width = g.split(' ')[2]
                         str_to_run_in_terminal = "iterative_solver " + sketch_file_name + " " + stateful_alu_file + " " + stateless_alu_file + " " + \
                                          g + \
                                          constant_set + " " + input_bits + " --parallel-sketch " + cmd_line_list[i]
@@ -67,12 +71,11 @@ def run_complex(program_dict):
                                                     stateful_alu_file[stateful_alu_file.rfind('/') + 1:stateful_alu_file.rfind('.')] + '_' + \
                                                     'with_stateless_alu' + '_' + \
                                                     stateless_alu_file[stateless_alu_file.rfind('/') + 1:stateless_alu_file.rfind('.')] + \
-                                                    '_' + str(depth) + "_" + str(width) + '_slice_' + str(i + 1) + '.output'
+                                                    '_' + depth + "_" + width + '_slice_' + str(i + 1) + '.output'
                         with open(iterative_solver_output_file_name, 'w') as file:
                             file.write(output)
                         # It will return 0 if one of the grouped files get successful compilation
                         if (ret_code == 0):
-                            print("HHHHHHHHHHHappy!!!!!!!")
                             dep_wid_info = re.findall("Synthesis succeeded with (\d+) stages and (\d+) ALUs per stage", output)
                             depth_list.append(int(dep_wid_info[0][0]))
                             width_list.append(int(dep_wid_info[0][1]))
@@ -83,6 +86,9 @@ def run_complex(program_dict):
                             time_used_for_all_slice.append(time_end-time_start)
                             flag = 1
                             break
+                    if flag == 0:
+                        print("Compilation fails for Program: " + program_file[program_file.rfind('/') + 1:] + ", with alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + " in slice No." + str(i + 1))
+                        sys.exit(1)
                 print("The total time used if we use parallel computing resources is:", round(max(time_used_for_all_slice),2), 's')
                 print("The resource usage is ", max(depth_list), " Stages with " , sum(width_list), " ALUs per stage")
 
