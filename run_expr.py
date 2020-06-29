@@ -72,7 +72,6 @@ def run_complex(program_dict):
                             file.write(output)
                         # It will return 0 if one of the grouped files get successful compilation
                         if (ret_code == 0):
-                            print("HHHHHHHHHHHappy!!!!!!!")
                             dep_wid_info = re.findall("Synthesis succeeded with (\d+) stages and (\d+) ALUs per stage", output)
                             depth_list.append(int(dep_wid_info[0][0]))
                             width_list.append(int(dep_wid_info[0][1]))
