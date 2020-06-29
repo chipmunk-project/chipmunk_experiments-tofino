@@ -28,7 +28,12 @@ Script to run the test
 # Run Chipmunk with Banzai's ALU
 1. go to chipmunk_experiments-tofino folder
 ```
-python3 run_expr_simple.py
+python3 run_expr.py simple_part
+```
+Optional
+```
+python3 run_expr.py simple
+python3 run_expr.py complex
 ```
 
 # Run Chipmunk with Tofino's ALU

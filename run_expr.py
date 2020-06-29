@@ -115,7 +115,7 @@ def main(argv):
         run_simple(program_list, grid_size_list, group_size_list, alu_list, stateless_alu)
     else:
         assert run_type == "complex"
-        program_dict = {"dns_ttl_change.c" : [[' 1 1 ', ' 3 2 '], ' 1 ' ,'nested_ifs.alu'],
+        program_dict = {"dns_ttl_change.c" : [[' 1 1 ', ' 3 4 '], ' 1 ' ,'nested_ifs.alu'],
                         "stateful_fw.c" : [[' 1 1 ', ' 1 2 ', ' 4 3 '], ' 1 ', 'pred_raw.alu'],
                         "flowlets.c" : [[' 1 1 ', ' 3 3 '], ' 1 ', 'pred_raw.alu'],
                         "learn_filter.c" : [[' 1 1 ', ' 3 2 '], ' 1 ', 'raw.alu'],
