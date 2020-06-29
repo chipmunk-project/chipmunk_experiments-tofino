@@ -19,78 +19,84 @@ def run_simple(program_list, grid_size_list, group_size_list, alu_list, stateles
     
 def run_complex(program_dict):
     for x, y  in program_dict.items():
-            domino_file_name = '../domino-examples/domino_programs/' + x
-            print(domino_file_name)
-            filename = domino_file_name[domino_file_name.rfind('/') + 1 : domino_file_name.rfind('.')]
-            stateful_alu_file = 'example_alus/stateful_alus/' + y[2]
-            stateless_alu_file = 'example_alus/stateless_alus/stateless_alu.alu'
+        domino_file_name = '../domino-examples/domino_programs/' + x
+        filename = domino_file_name[domino_file_name.rfind('/') + 1 : domino_file_name.rfind('.')]
+        stateful_alu_file = 'example_alus/stateful_alus/' + y[2]
+        stateless_alu_file = 'example_alus/stateless_alus/stateless_alu.alu'
+
+        group_size = y[1]
+
+        (ret_code, output) = subprocess.getstatusoutput("mutator " + domino_file_name)
+        assert ret_code == 0, "mutator failed"
+
+        total_num_of_files = 10
+        Sum = 0
+        time_group_mutator = []
+        depth_list_mutator = []
+        width_list_mutator = []
+        #add a for loop for all mutations
+        for i in range(total_num_of_files):
+            bit_size_for_constant_set = '2'
+            program_file = "/tmp/" + filename + "_equivalent_" + str(i+1) + ".c"
+
+            cmd_line_list, constant_set, total_num_of_grouped_files, _ = generate_cmd_line(program_file, group_size, bit_size_for_constant_set)
+            # Output canonicalizer file to /tmp/file_name_canonicalizer.c
+            canonicalizer_file ="/tmp/" + filename + "_equivalent_" + str(i+1) + "_canonicalizer.c"
  
-            group_size = y[1]
-
-            (ret_code, output) = subprocess.getstatusoutput("mutator " + domino_file_name)
-            assert ret_code == 0, "mutator failed"
-
-            total_num_of_files = 10
-            Sum = 0
-            time_group = []
+            # Output restore the total number of group files
+            # the name of group_files is /tmp/<file_name>_canonicalizer_equivalent_(/d).sk
+            group_file = "/tmp/" + canonicalizer_file[canonicalizer_file.rfind('/') + 1:canonicalizer_file.rfind('.')] + "_equivalent_" + str(int(total_num_of_grouped_files) - 1) + ".c"
+         
+            # Run iterative solver for grouped files
+            sketch_file_name = "/tmp/" + canonicalizer_file[canonicalizer_file.rfind('/') + 1:canonicalizer_file.rfind('.')] + "_equivalent_" + str(int(total_num_of_grouped_files) - 1) +".sk"
+            constant_set = "'" + constant_set + "'"
+            time_used_for_all_slice = []
             depth_list = []
             width_list = []
-            #add a for loop for all mutations
-            for i in range(total_num_of_files):
-                bit_size_for_constant_set = '2'
-                program_file = "/tmp/" + filename + "_equivalent_" + str(i+1) + ".c"
-
-                cmd_line_list, constant_set, total_num_of_grouped_files, _ = generate_cmd_line(program_file, group_size, bit_size_for_constant_set)
-                # Output canonicalizer file to /tmp/file_name_canonicalizer.c
-                canonicalizer_file ="/tmp/" + filename + "_equivalent_" + str(i+1) + "_canonicalizer.c"
-     
-                # Output restore the total number of group files
-                # the name of group_files is /tmp/<file_name>_canonicalizer_equivalent_(/d).sk
-                group_file = "/tmp/" + canonicalizer_file[canonicalizer_file.rfind('/') + 1:canonicalizer_file.rfind('.')] + "_equivalent_" + str(int(total_num_of_grouped_files) - 1) + ".c"
-             
-                # Run iterative solver for grouped files
-                sketch_file_name = "/tmp/" + canonicalizer_file[canonicalizer_file.rfind('/') + 1:canonicalizer_file.rfind('.')] + "_equivalent_" + str(int(total_num_of_grouped_files) - 1) +".sk"
-                constant_set = "'" + constant_set + "'"
-                time_used_for_all_slice = []
-                depth_list = []
-                width_list = []
-                input_bits = '10'
-                for i in range(len(cmd_line_list)):
-                    flag = 0
-                    for g in y[0]:
-                        depth = g.split(' ')[1]
-                        width = g.split(' ')[2]
-                        str_to_run_in_terminal = "iterative_solver " + sketch_file_name + " " + stateful_alu_file + " " + stateless_alu_file + " " + \
-                                         g + \
-                                         constant_set + " " + input_bits + " --parallel-sketch " + cmd_line_list[i]
-                        time_start=time.time()
-                        (ret_code, output) = subprocess.getstatusoutput(str_to_run_in_terminal)
-                        iterative_solver_output_file_name = '/tmp/' + \
-                                                    sketch_file_name[sketch_file_name.rfind('/') + 1:sketch_file_name.rfind('.')] + '_' + \
-                                                    'with_stateful_alu' + '_' + \
-                                                    stateful_alu_file[stateful_alu_file.rfind('/') + 1:stateful_alu_file.rfind('.')] + '_' + \
-                                                    'with_stateless_alu' + '_' + \
-                                                    stateless_alu_file[stateless_alu_file.rfind('/') + 1:stateless_alu_file.rfind('.')] + \
-                                                    '_' + depth + "_" + width + '_slice_' + str(i + 1) + '.output'
-                        with open(iterative_solver_output_file_name, 'w') as file:
-                            file.write(output)
-                        # It will return 0 if one of the grouped files get successful compilation
-                        if (ret_code == 0):
-                            dep_wid_info = re.findall("Synthesis succeeded with (\d+) stages and (\d+) ALUs per stage", output)
-                            depth_list.append(int(dep_wid_info[0][0]))
-                            width_list.append(int(dep_wid_info[0][1]))
-                            print(str_to_run_in_terminal)
-                            time_end=time.time()
-                            print("Compilation succeeds for Program: " + program_file[program_file.rfind('/') + 1:] + ", with stateful alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + ", with grid size: " + str(dep_wid_info[0][0]) + " * " + str(dep_wid_info[0][1]) + " in slice " + str(i + 1))
-                            print('time cost', round(time_end-time_start, 2),'s')
-                            time_used_for_all_slice.append(time_end-time_start)
-                            flag = 1
-                            break
-                    if flag == 0:
-                        print("Compilation fails for Program: " + program_file[program_file.rfind('/') + 1:] + ", with alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + " in slice No." + str(i + 1))
-                        sys.exit(1)
-                print("The total time used if we use parallel computing resources is:", round(max(time_used_for_all_slice),2), 's')
-                print("The resource usage is ", max(depth_list), " Stages with " , sum(width_list), " ALUs per stage")
+            input_bits = '10'
+            for i in range(len(cmd_line_list)):
+                flag = 0
+                for g in y[0]:
+                    depth = g.split(' ')[1]
+                    width = g.split(' ')[2]
+                    str_to_run_in_terminal = "iterative_solver " + sketch_file_name + " " + stateful_alu_file + " " + stateless_alu_file + " " + \
+                                     g + \
+                                     constant_set + " " + input_bits + " --parallel-sketch " + cmd_line_list[i]
+                    time_start=time.time()
+                    (ret_code, output) = subprocess.getstatusoutput(str_to_run_in_terminal)
+                    iterative_solver_output_file_name = '/tmp/' + \
+                                                sketch_file_name[sketch_file_name.rfind('/') + 1:sketch_file_name.rfind('.')] + '_' + \
+                                                'with_stateful_alu' + '_' + \
+                                                stateful_alu_file[stateful_alu_file.rfind('/') + 1:stateful_alu_file.rfind('.')] + '_' + \
+                                                'with_stateless_alu' + '_' + \
+                                                stateless_alu_file[stateless_alu_file.rfind('/') + 1:stateless_alu_file.rfind('.')] + \
+                                                '_' + depth + "_" + width + '_slice_' + str(i + 1) + '.output'
+                    with open(iterative_solver_output_file_name, 'w') as file:
+                        file.write(output)
+                    # It will return 0 if one of the grouped files get successful compilation
+                    if (ret_code == 0):
+                        dep_wid_info = re.findall("Synthesis succeeded with (\d+) stages and (\d+) ALUs per stage", output)
+                        depth_list.append(int(dep_wid_info[0][0]))
+                        width_list.append(int(dep_wid_info[0][1]))
+                        # print(str_to_run_in_terminal)
+                        time_end=time.time()
+                        # print("Compilation succeeds for Program: " + program_file[program_file.rfind('/') + 1:] + ", with stateful alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + ", with grid size: " + str(dep_wid_info[0][0]) + " * " + str(dep_wid_info[0][1]) + " in slice " + str(i + 1))
+                        # print('time cost', round(time_end-time_start, 2),'s')
+                        time_used_for_all_slice.append(time_end-time_start)
+                        flag = 1
+                        break
+                if flag == 0:
+                    print("Compilation fails for Program: " + program_file[program_file.rfind('/') + 1:] + ", with alu: " + stateful_alu_file + " and stateless alu: " + stateless_alu_file + " in slice No." + str(i + 1))
+                    sys.exit(1)
+            print("The total time used if we use parallel computing resources is:", round(max(time_used_for_all_slice),2), 's')
+            print("The resource usage is ", max(depth_list), " Stages with " , sum(width_list), " ALUs per stage")
+            depth_list_mutator.append(max(depth_list))
+            width_list_mutator.append(sum(width_list))
+            time_group_mutator.append(round(max(time_used_for_all_slice),2))
+            Sum += 1
+        print("The successful compilation rate for " + domino_file_name + " mutators by iterative_solver is " + str(Sum/total_num_of_files*100) + "%")
+        print("The avg compilation time is ", round(sum(time_group_mutator)/len(time_group_mutator), 2), "s")
+        print("The avg resource usage is ", round(sum(depth_list_mutator)/len(depth_list_mutator), 2), " Stages with ", round(sum(width_list_mutator)/len(width_list_mutator), 2), " ALUs per stage") 
 
 def main(argv):
     """Main program."""
@@ -109,6 +115,7 @@ def main(argv):
         run_simple(program_list, grid_size_list, group_size_list, alu_list, stateless_alu)
     elif run_type == "simple_part":
         program_list = ['sampling.c','snap_heavy_hitter.c', 'spam_detection.c']
+        alu_list = ['if_else_raw.alu', 'pair.alu', 'pair.alu']
         grid_size_list = [' 2 1 ', ' 1 1 ', ' 1 1 ']
         group_size_list = [' 1 ', ' 2 ', ' 2 ']
         stateless_alu = 'example_alus/stateless_alus/stateless_alu.alu'

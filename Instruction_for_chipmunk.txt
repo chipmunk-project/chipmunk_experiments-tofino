@@ -27,6 +27,7 @@ Script to run the test
 
 # Run Chipmunk with Banzai's ALU
 1. go to chipmunk_experiments-tofino folder
+Recommended:
 ```
 python3 run_expr.py simple_part
 ```
