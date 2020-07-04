@@ -15,8 +15,18 @@ NOTE2: When installing SKETCH, please put add it into the PATH
 test domino program with chipmunk
 
 1. If you want to run all experiments together: 
+1.1 part of simple example
 ```
-python3 run_expr_simple.py
+python3 run_expr.py simple_part
+```
+1.2 all of simple examples
+```
+python3 run_expr.py simple
+```
+
+1.3 all of complex examples
+```
+python3 run_expr.py complex
 ```
 
 2. If you only want to run one benchmark (Take learn_filter.c as an example)
